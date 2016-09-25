@@ -14,3 +14,5 @@
 - Move the player to reach the waterline at the top to score.
 - Avoid collisions with moving objects.
 - Start over once you use up all three chances.
+
+##### You can check out the game [here](https://jesslee0124.github.io/frogger-game/)
