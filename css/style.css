@@ -1,3 +1,100 @@
+html, body {
+	margin: 0 auto;
+	padding: 0;
+	height: 100%;
+}
+
 body {
     text-align: center;
+    background: url(../images/bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: left top;
+    min-height: 100%;
+}
+
+canvas {
+	margin-top: -50px;
+}
+
+header {
+	/*float: left;*/
+	margin: 20px;
+}
+
+h2 {
+	font-size: 1.5em;
+	margin: 0;
+	text-transform: uppercase;
+	color: #6c55ea;
+	text-align: left;
+}
+
+.life {
+	padding-top: 10px;
+}
+
+#score,
+#life {
+	color: #de650f;
+}
+
+#life {
+	display: hidden;
+}
+
+.star {
+	display: inline-block;
+}
+
+.star img {
+	width: 42px;
+    position: absolute;
+    top: 30px;
+    left: 80px;
+}
+
+#star-2 {
+	left: 117px;
+}
+
+#star-3 {
+	left: 154px;
+}
+
+#characters {
+	width: 420px;
+	margin: -130px auto 0;
+}
+
+#characters img {
+	width: 80px;
+}
+
+@media screen and (max-width: 850px) {
+	canvas {
+		width: 380px;
+	}
+
+	#characters {
+		width: 401px;
+		margin: -23px auto 0;
+	}
+
+	#characters img {
+		width: 65px;
+	}
+}
+
+@media screen and (max-width: 399px) {
+	canvas {
+		width: 300px;
+	}
+
+	#characters {
+		width: 300px;
+	}
+
+	#characters img {
+		width: 40px;
+	}
 }
