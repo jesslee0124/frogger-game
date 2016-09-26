@@ -76,7 +76,6 @@ var Player = function() {
     // we've provided one for you to get started
     this.x = 200;
     this.y = 400;
-    this.life;
     this.sprite = 'images/char-boy.png';
 };
 
