@@ -1,11 +1,9 @@
-var width = 505;
-var height = 404;
+var WIDTH = 505;
+var HEIGHT = 404;
 var score = 0;
 var life = 3;
 var gameOver;
-var reachedWall;
-var collision;
-var star3, star2, star1;
+var star1;
 var star1Removed = false;
 
 // Enemies our player must avoid
@@ -22,7 +20,7 @@ Enemy.prototype.update = function(dt) {
     // Multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if (this.x < width) {
+    if (this.x < WIDTH) {
         this.x += this.speed * dt;
     } else {
         this.x = 0;
@@ -31,12 +29,12 @@ Enemy.prototype.update = function(dt) {
     document.getElementById("score").innerHTML = score;
 
     // Update Star Images to reflect the number of life
-    star3 = document.getElementById("star-3");
-    star2 = document.getElementById("star-2");
+    var star3 = document.getElementById("star-3");
+    var star2 = document.getElementById("star-2");
     star1 = document.getElementById("star-1");
-    if (life === 2 && star3 != null) {
+    if (life === 2 && star3 !== null) {
         star3.parentNode.removeChild(star3);
-    } else if (life === 1 && star2 != null) {
+    } else if (life === 1 && star2 !== null) {
         star2.parentNode.removeChild(star2);
     } 
 };
@@ -48,6 +46,7 @@ Enemy.prototype.render = function() {
 
 // Check collisions and update life and call reset
 Enemy.prototype.checkCollisions = function(player) {
+    var collision;
     if (Math.abs(this.x - player.x) < 101 && Math.abs(this.y - player.y) < 76)  {
         collision = true;
         if (collision === true && life >= 1) {
@@ -60,7 +59,7 @@ Enemy.prototype.checkCollisions = function(player) {
                 if (star1Removed === true) {
                     setTimeout(function alertGameOver() {
                         alert("Game Over... You scored " + score + ".");
-                        alert("Press enter to restart the game!")
+                        alert("Press enter to restart the game!");
                         life = 3;
                         score = 0;
                         player.reset(score, life);  
@@ -77,6 +76,7 @@ var Player = function() {
     // we've provided one for you to get started
     this.x = 200;
     this.y = 400;
+    this.life;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -92,47 +92,38 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+
 // Moves the players after detecting the keyboard input(up,down,right,left)
 Player.prototype.handleInput = function(key) {
+    var playerObject = this;
     if (key === 'up') {
-        if (this.y > 0 && this.y <= height) {
+        if (this.y > 0 && this.y <= HEIGHT) {
             // Moved Up
             this.y = this.y - 83;
             if (this.y === -15) {
                 score = score + 1;
                 setTimeout(function gameReset() {
-                    player.reset(score, life);
+                    playerObject.reset(score, life);
                 }, 100);
             }
         } else {
             gameOver = true;
         }
     } else if (key === 'down') {
-        if (this.y > 0 && this.y <= height - 83) {
+        if (this.y > 0 && this.y <= HEIGHT - 83) {
             // Moved Down
             this.y = this.y + 83;
-        } else if (this.y <= 400) {
-            // Reached wall
-            reachedWall = true;
-        } else {
-            console.log("game Over");
-        }
+        } 
     } else if (key === 'right') {
         if (this.x >= -2 && this.x < 402 && this.y > -15) {
             // Moved Right
             this.x = this.x + 101;
-        } else {
-            // Reached wall
-            reachedWall = true;
-        }
+        } 
     } else if (key === 'left') {
-        if (this.x > 0 && this.x <= width && this.y > -15) {
+        if (this.x > 0 && this.x <= WIDTH && this.y > -15) {
             // Moved Left
             this.x = this.x - 101;
-        } else {
-            // Reached wall
-            reachedWall = true;
-        }
+        } 
     }
 }
 
